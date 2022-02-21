@@ -1,0 +1,44 @@
+accounts:
+  - name: alice
+    coins: ["100000000uatom", "100000000000000000000aatm"]
+  - name: bob
+    coins: ["5000000000000aatm"]
+validator:
+  name: alice
+  staked: "100000000000000000000aatm"
+faucet:
+  name: bob 
+  coins: ["10aatm"]
+client:
+  openapi:
+    path: "docs/static/openapi.yml"
+  vuex:
+    path: "vue/src/store"
+build:
+  binary: "atmosd"
+init:
+  home: "$HOME/.atmosd"
+  app:
+    evm-rpc:
+      address: "0.0.0.0:8545"     # change the JSON-RPC address and port
+      ws-address: "0.0.0.0:8546"  # change the JSON-RPC websocket address and port
+genesis:
+  chain_id: "atmosd-1"
+  app_state:
+    staking:
+      params:
+        bond_denom: "aatm"
+    mint:
+      params:
+        mint_denom: "aatm"
+    crisis:
+      constant_fee:
+        denom: "aatm"
+    gov:
+      deposit_params:
+        min_deposit:
+          - amount: "10000000"
+            denom: "aatm"
+    evm:
+      params:
+        evm_denom: "aatm"
