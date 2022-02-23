@@ -30,6 +30,7 @@ cat $HOME/.atmosd/config/genesis.json | jq '.app_state["staking"]["params"]["bon
 cat $HOME/.atmosd/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="aatm"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
 cat $HOME/.atmosd/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="aatm"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
 cat $HOME/.atmosd/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="aatm"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
+cat $HOME/.atmosd/config/genesis.json | jq '.app_state["evm"]["params"]["evm_denom"]="aatm"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
 
 # increase block time (?)
 cat $HOME/.atmosd/config/genesis.json | jq '.consensus_params["block"]["time_iota_ms"]="30000"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
