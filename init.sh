@@ -1,12 +1,8 @@
 KEY="ppenter"
-CHAINID="atmos_3000-1"
+CHAINID="atmos_3000-32"
 MONIKER="atmos-founder"
 KEYRING="os"
 KEYALGO="eth_secp256k1"
-LOGLEVEL="info"
-# to trace evm
-#TRACE="--trace"
-TRACE="--trace"
 
 # validate dependencies are installed
 command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https://stedolan.github.io/jq/download/"; exit 1; }
@@ -86,4 +82,4 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-atmosd start --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aatm --json-rpc.api eth,txpool,personal,net,debug,web3
+# atmosd start --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aatm --json-rpc.api eth,txpool,personal,net,debug,web3
