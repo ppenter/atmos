@@ -1,8 +1,13 @@
 KEY="ppenter"
-CHAINID="atmos_3000-32"
+CHAINID="atmos_3000-1"
 MONIKER="atmos-founder"
 KEYRING="os"
 KEYALGO="eth_secp256k1"
+LOGLEVEL="info"
+# to trace evm
+#TRACE="--trace"
+TRACE="--trace"
+MIN_GAS="5000000aatm"
 
 # validate dependencies are installed
 command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https://stedolan.github.io/jq/download/"; exit 1; }
@@ -29,7 +34,7 @@ cat $HOME/.atmosd/config/genesis.json | jq '.app_state["mint"]["params"]["mint_d
 cat $HOME/.atmosd/config/genesis.json | jq '.app_state["evm"]["params"]["evm_denom"]="aatm"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
 
 # increase block time (?)
-cat $HOME/.atmosd/config/genesis.json | jq '.consensus_params["block"]["time_iota_ms"]="30000"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
+cat $HOME/.atmosd/config/genesis.json | jq '.consensus_params["block"]["time_iota_ms"]="10"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
 
 # Set gas limit in genesis
 cat $HOME/.atmosd/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > $HOME/.atmosd/config/tmp_genesis.json && mv $HOME/.atmosd/config/tmp_genesis.json $HOME/.atmosd/config/genesis.json
@@ -82,4 +87,4 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-# atmosd start --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aatm --json-rpc.api eth,txpool,personal,net,debug,web3
+# atmosd start --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aatm --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --rpc.unsafe --rpc.laddr "tcp://0.0.0.0:26657"
